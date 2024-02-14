@@ -15,6 +15,7 @@ class PGD:
 
         self.T = T
         self.points = np.array([[x0, f(x0)]])
+        self.eta = []
         self.optimum = np.array([[x0, f(x0)]])
 
         # about errors
@@ -31,6 +32,7 @@ class PGD:
 
         for t in range(1, self.T + 1):
             eta_t = self.compute_eta(t)
+            self.eta.append(eta_t)
             x = self.project(x - eta_t * self.subgrad_f(x))
             self.points = np.append(self.points, [[x, self.f(x)]], axis=0)
 
